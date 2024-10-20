@@ -12,11 +12,11 @@ const instance = axios.create({
   },
 });
 
-const trandingMovies = async () => {
+const trandMovies = async () => {
   const response = await instance.get('/trending/movie/day');
   return response.data;
 };
-export default trandingMovies;
+export default trandMovies;
 // export const searchMovies = async (query, page) => {
 //   const response = await instance.get('/search/movie', {
 //     params: {

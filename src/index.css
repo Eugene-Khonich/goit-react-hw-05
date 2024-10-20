@@ -14,8 +14,8 @@
 }
 #root {
   display: flex;
-  place-items: center;
-  margin: 0 auto;
+  flex-direction: column;
+  margin: auto 0;
   min-width: 100%;
 }
 body {

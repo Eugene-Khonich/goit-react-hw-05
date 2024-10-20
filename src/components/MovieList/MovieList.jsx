@@ -1,8 +1,12 @@
-const MovieList = () => {
+const MovieList = ({ movies }) => {
   return (
-    <div>
-      <h1>MovieList</h1>
-    </div>
+    <ul>
+      {movies.map(movie => (
+        <li key={movie.id}>
+          <a href="">{movie.title}</a>
+        </li>
+      ))}
+    </ul>
   );
 };
 
