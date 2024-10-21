@@ -12,18 +12,18 @@ const instance = axios.create({
   },
 });
 
-const trandMovies = async () => {
+export const trandMovies = async () => {
   const response = await instance.get('/trending/movie/day');
   return response.data;
 };
-export default trandMovies;
-// export const searchMovies = async (query, page) => {
-//   const response = await instance.get('/search/movie', {
-//     params: {
-//       include_adult: 'false',
-//       page: page,
-//       query: query,
-//     },
-//   });
-//   return response.data;
-// };
+
+export const searchMovies = async query => {
+  const response = await instance.get('/search/movie', {
+    params: {
+      include_adult: 'false',
+      // page: page,
+      query: query,
+    },
+  });
+  return response.data;
+};

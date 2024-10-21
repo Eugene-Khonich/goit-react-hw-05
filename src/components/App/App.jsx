@@ -1,20 +1,25 @@
 import './App.module.css';
+import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
-// import searchMovies from '../../api';
+import { lazy, Suspense } from 'react';
 import Navigation from '../Navigation/Navigation';
-import HomePage from '../../pages/HomePage/HomePage';
-// import MoviesPage from '../../pages/MoviesPage/MoviesPage';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
+
+const MoviesPage = lazy(() => import('../../pages/MoviesPage/MoviesPage'));
+const HomePage = lazy(() => import('../..//pages/HomePage/HomePage'));
 
 const App = () => {
   return (
     <>
       <Navigation />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        {/* <Route path="movies" element={<MoviesPage />} /> */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <Suspense fallback={<div>Loading page...</div>}>
+        <Toaster />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="movies" element={<MoviesPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import trandMovies from '../../api';
+import { trandMovies } from '../../api';
 import { useState, useEffect } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
 
