@@ -27,3 +27,8 @@ export const searchMovies = async query => {
   });
   return response.data;
 };
+
+export const moviesById = async id => {
+  const response = await instance.get(`/movie/${id}`);
+  return response.data;
+};

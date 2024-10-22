@@ -1,9 +1,29 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { moviesById } from '../../api';
+import MovieDetails from '../../components/MovieDetails/MovieDetails';
 
 const MovieDetailsPage = () => {
+  const { movieId } = useParams();
+  const [movie, setMovie] = useState(null);
+
+  useEffect(() => {
+    if (!movieId) return;
+    const fetchMoviesById = async () => {
+      try {
+        const response = await moviesById(movieId);
+        setMovie(response);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchMoviesById();
+  }, [movieId]);
+
   return (
     <div>
-      <h2>MovieDetailsPage</h2>
+      {movie && <MovieDetails movie={movie} />}
       <ul>
         <li>
           <NavLink to="cast">Cast</NavLink>
