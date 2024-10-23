@@ -21,7 +21,6 @@ export const searchMovies = async query => {
   const response = await instance.get('/search/movie', {
     params: {
       include_adult: 'false',
-      // page: page,
       query: query,
     },
   });
@@ -30,5 +29,15 @@ export const searchMovies = async query => {
 
 export const moviesById = async id => {
   const response = await instance.get(`/movie/${id}`);
+  return response.data;
+};
+
+export const castById = async id => {
+  const response = await instance.get(`/movie/${id}/credits`);
+  return response.data;
+};
+
+export const reviewsById = async id => {
+  const response = await instance.get(`/movie/${id}/reviews`);
   return response.data;
 };

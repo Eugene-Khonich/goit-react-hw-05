@@ -10,7 +10,7 @@ const MovieDetails = ({ movie }) => {
       />
       <div>
         <h2>
-          {movie.title}
+          {movie.title} <br />
           <span>Original title: {movie.original_title}</span>
         </h2>
         <ul>

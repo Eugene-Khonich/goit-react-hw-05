@@ -9,7 +9,6 @@ const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    if (!movieId) return;
     const fetchMoviesById = async () => {
       try {
         const response = await moviesById(movieId);
@@ -23,7 +22,7 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      {movie && <MovieDetails movie={movie} />}
+      {movie !== null && <MovieDetails movie={movie} />}
       <ul>
         <li>
           <NavLink to="cast">Cast</NavLink>
