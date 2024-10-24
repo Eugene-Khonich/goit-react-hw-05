@@ -1,6 +1,8 @@
+import css from './MovieReviews.module.css';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { reviewsById } from '../../api';
+import toast from 'react-hot-toast';
 
 const MovieReviews = () => {
   const [reviews, setReviews] = useState(null);
@@ -12,22 +14,27 @@ const MovieReviews = () => {
       try {
         const response = await reviewsById(movieId);
         setReviews(response.results);
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        toast.error(
+          `Whoops, we found a problem! ${error.message} Please try again later!`,
+          {
+            position: 'top-center',
+            duration: 2000,
+          }
+        );
       }
     };
     fetchReviews();
   }, [movieId]);
 
   return (
-    <div>
-      <h2>MovieReviews</h2>
+    <div className={css.container}>
       {reviews !== null &&
         reviews.map(item => {
           return (
-            <div key={item.id}>
-              <h3>Author: {item.author}</h3>
-              <p>{item.content}</p>
+            <div key={item.id} className={css.review}>
+              <h3 className={css.author}>Author: {item.author}</h3>
+              <p className={css.content}>{item.content}</p>
             </div>
           );
         })}

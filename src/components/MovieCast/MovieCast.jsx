@@ -1,10 +1,14 @@
+import css from './MovieCast.module.css';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { castById } from '../../api';
+import toast from 'react-hot-toast';
 
 const MovieCast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState(null);
+  const defaultImg =
+    'https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg';
 
   useEffect(() => {
     if (!movieId) return;
@@ -12,8 +16,14 @@ const MovieCast = () => {
       try {
         const response = await castById(movieId);
         setCast(response.cast);
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        toast.error(
+          `Whoops, we found a problem! ${error.message} Please try again later!`,
+          {
+            position: 'top-center',
+            duration: 2000,
+          }
+        );
       }
     };
     fetchCast();
@@ -21,20 +31,23 @@ const MovieCast = () => {
 
   return (
     <div>
-      <h2>CASTS</h2>
-      <ul>
+      <ul className={css.list}>
         {cast !== null &&
           cast.map(item => {
             return (
-              <div key={item.id}>
+              <div key={item.id} className={css.card}>
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${item.profile_path}`}
+                  src={
+                    item.profile_path
+                      ? `https://image.tmdb.org/t/p/w500${item.profile_path}`
+                      : defaultImg
+                  }
                   alt={item.name}
-                  width={100}
+                  className={css.img}
                 />
                 <ul>
-                  <li>{item.name}</li>
-                  <li>{item.character}</li>
+                  <li className={css.name}>{item.name}</li>
+                  <li className={css.role}>{item.character}</li>
                 </ul>
               </div>
             );

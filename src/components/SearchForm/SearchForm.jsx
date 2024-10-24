@@ -1,3 +1,5 @@
+import css from './SearchForm.module.css';
+
 const SearchForm = ({ setSearchParams }) => {
   const handleSubmit = e => {
     e.preventDefault();
@@ -8,8 +10,15 @@ const SearchForm = ({ setSearchParams }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="query" placeholder="Search movies" />
-      <button type="submit">Search</button>
+      <input
+        className={css.input}
+        type="text"
+        name="query"
+        placeholder="Search movies"
+      />
+      <button className={css.btn} type="submit">
+        Search
+      </button>
     </form>
   );
 };

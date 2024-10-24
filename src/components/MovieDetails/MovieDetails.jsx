@@ -1,30 +1,43 @@
+import css from './MovieDetails.module.css';
+
 const MovieDetails = ({ movie }) => {
-  // const defaultImg =
-  //   'https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg';
+  const defaultImg =
+    'https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg';
+
   return (
-    <div>
+    <div className={css.container}>
       <img
-        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+        src={
+          movie.poster_path
+            ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+            : defaultImg
+        }
         alt={movie.title}
-        width={300}
+        className={css.img}
       />
       <div>
-        <h2>
-          {movie.title} <br />
-          <span>Original title: {movie.original_title}</span>
+        <h2 className={css.title}>
+          <span className={css.span}>Title:</span>
+          <br />
+          {movie.title}
         </h2>
-        <ul>
-          <li>
-            <h3>Tagline:</h3>
-            <p>{movie.tagline}</p>
+        <p className={css.original}>
+          <span className={css.span}>Original title:</span>
+          <br />
+          {movie.original_title}
+        </p>
+        <ul className={css.list}>
+          <li className={css.item}>
+            <h3 className={css.itemTitle}>Tagline:</h3>
+            <p className={css.itemText}>{movie.tagline}</p>
           </li>
-          <li>
-            <h3>Overview:</h3>
-            <p>{movie.overview}</p>
+          <li className={css.item}>
+            <h3 className={css.itemTitle}>Overview:</h3>
+            <p className={css.itemText}>{movie.overview}</p>
           </li>
-          <li>
-            <h3>Genres:</h3>
-            <p>
+          <li className={css.item}>
+            <h3 className={css.itemTitle}>Genres:</h3>
+            <p className={css.itemText}>
               {movie.genres && movie.genres.map(itm => itm.name).join(', ')}
             </p>
           </li>

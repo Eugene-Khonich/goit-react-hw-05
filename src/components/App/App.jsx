@@ -1,3 +1,4 @@
+import css from './App.module.css';
 import './App.module.css';
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
@@ -15,7 +16,8 @@ const MovieReviews = lazy(() => import('../MovieReviews/MovieReviews'));
 
 const App = () => {
   return (
-    <>
+    <div className={css.container}>
+      <h1 className={css.title}>Movie Search WebAPP</h1>
       <Navigation />
       <Suspense fallback={<div>Loading page...</div>}>
         <Toaster />
@@ -29,7 +31,7 @@ const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
-    </>
+    </div>
   );
 };
 
